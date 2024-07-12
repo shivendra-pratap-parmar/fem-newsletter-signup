@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+        <link rel="stylesheet" type="text/css" href="./custom.css"/>
+        
+        <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+    </head>
+
+    <body>
+        <div class="newsletter-container">
+            <div 
+                class="left"
+            >
+                <p
+                    class="fs-1 fw-bold mb-1"
+                >
+                    Stay updated!
+                </p>
+
+                <p
+                    class="fs-4"
+                >
+                    Join 60,000+ product managers receiving monthly updates on:
+                </p>
+
+                <ul
+                    class="custom-list"
+                >
+                    <li class="fs-4">Product discovery and building what matters</li>
+                    <li class="fs-4">Measuring to ensure updates are a success</li>
+                    <li class="fs-4">And much more!</li>
+                </ul>
+                
+                <div
+                    class="form-container"
+                >
+                    <div 
+                        class="form-control"
+                    >
+                        <div
+                            class="hstack"
+                        >
+                            <label 
+                                for="email-input-field" 
+                                class="form-label"
+                            >
+                                Email address
+                            </label>
+
+                            <p
+                                id="result"
+                                class="form-label"
+                            >
+                                
+                            </p>
+                        </div>
+                        
+                        <input 
+                            type="email" 
+                            id="email-input-field" 
+                            class="form-input mb-4"
+                            placeholder="email@company.com"
+                            onfocus="resetInput()"
+                        />
+                    </div>
+                    
+                    <button
+                        class="form-btn"
+                        onclick="validateEmail()"
+                    >
+                        Subscribe to monthly newsletter
+                    </button>
+                </div>
+            </div>
+
+            <div class="right"></div>
+        </div>
+
+        <div
+            class="success-container"
+        >
+            <div
+                class="success-content mb-4"
+            >
+                <img
+                    src="./assets/images/icon-success.svg"
+                    class="success-icon mb-1"
+                    alt="success-icon"
+                />
+    
+                <p
+                    class="subscribe-success-txt mb-1"
+                >
+                    Thanks for subscribing!
+                </p>
+    
+                <p
+                    class="subscription-detail-txt mb-1"
+                >
+                    A confirmation email has been sent to <strong>ash@loremcompany.com</strong>.
+                    Please open it and click the button inside to confirm your subscription.
+                </p>
+            </div>
+
+            <button
+                class="form-btn"
+                style="border-radius: 5px;"
+            >
+                Dismiss message
+            </button>
+        </div>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', () => {
+                let max_width = window.innerWidth;
+                // set min-height of image container in accordance with aspect ratio
+                if(max_width >= 320 && max_width < 600){
+                    let imgContainer = document.querySelector('.right');
+                    imgContainer.style.minHeight = Math.ceil((284 / 375) * max_width) + 'px';
+                }
+                document.querySelector('.success-container').classList.add('hide');
+            });
+
+            function validateEmail() {
+                let emailInput = document.getElementById("email-input-field");
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                let resultElement = document.getElementById("result");
+                
+                if (!emailPattern.test(emailInput.value)) {
+                    resultElement.textContent = "Valid email required";
+                    resultElement.style.color = "hsl(4, 100%, 67%)";
+                    emailInput.classList.add("invalid-input");
+                }
+                else{
+                    resultElement.textContent = "";
+                    document.querySelector('.newsletter-container').classList.add('hide');
+                    document.querySelector('.success-container').classList.remove('hide');
+                }
+            }
+
+            function resetInput() {
+                let emailInput = document.getElementById("email-input-field");
+                emailInput.classList.remove("invalid-input");
+                document.getElementById('result').textContent = '';
+            }
+        </script>
+    </body>
+</html>
